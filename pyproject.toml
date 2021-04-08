@@ -10,14 +10,12 @@ youtube-dl = "^2021.3.25"
 fastapi = "^0.63.0"
 httpx = "^0.17.1"
 beautifulsoup4 = "^4.9.3"
-"calmjs.parse" = "^1.2.5"
+"calmjs.parse" = {git = "https://github.com/calmjs/calmjs.parse.git", rev = "var_extractor_prototype"}
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
 uvicorn = "^0.13.4"
 
-[tool.poetry.scripts]
-test-server = 'uvicorn newhorizons.main:app'
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"

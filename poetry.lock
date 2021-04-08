@@ -44,12 +44,16 @@ description = "Various parsers for ECMA standards."
 name = "calmjs.parse"
 optional = false
 python-versions = "*"
-version = "1.2.5"
+version = "1.3.0.dev0"
 
 [package.dependencies]
 ply = ">=3.6"
 setuptools = "*"
 
+[package.source]
+reference = "798a3d97e9c2eb787f7c4919c33d4486c9102ab1"
+type = "git"
+url = "https://github.com/calmjs/calmjs.parse.git"
 [[package]]
 category = "main"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -320,7 +324,7 @@ python-versions = "*"
 version = "2021.3.25"
 
 [metadata]
-content-hash = "13a1d1337e51f9ec25b0d9bc0d8cec7bd1491bbb4c5d133a9bfd480679ee7e37"
+content-hash = "64ee4b120960ef53ecc80a299f23bf7037049bbfdb68ae00125b0a3994d5952a"
 lock-version = "1.0"
 python-versions = "^3.9"
 
@@ -338,11 +342,7 @@ beautifulsoup4 = [
     {file = "beautifulsoup4-4.9.3-py3-none-any.whl", hash = "sha256:fff47e031e34ec82bf17e00da8f592fe7de69aeea38be00523c04623c04fb666"},
     {file = "beautifulsoup4-4.9.3.tar.gz", hash = "sha256:84729e322ad1d5b4d25f805bfa05b902dd96450f43842c4e99067d5e1369eb25"},
 ]
-"calmjs.parse" = [
-    {file = "calmjs.parse-1.2.5-py2-none-any.whl", hash = "sha256:dd2c576169e683f0a06b5e8908d7b9d134e756ae75763c21b721d9937b0b422a"},
-    {file = "calmjs.parse-1.2.5-py3-none-any.whl", hash = "sha256:163ae575c478944c3a54c8e26d5cca794a977c5bf160f6aaa3731b51ae88ab99"},
-    {file = "calmjs.parse-1.2.5.zip", hash = "sha256:693d18bcfdb14f2a33f64288680adc138275d39de5980fb46f5b882df6e1dbde"},
-]
+"calmjs.parse" = []
 certifi = [
     {file = "certifi-2020.12.5-py2.py3-none-any.whl", hash = "sha256:719a74fb9e33b9bd44cc7f3a8d94bc35e4049deebe19ba7d8e108280cfd59830"},
     {file = "certifi-2020.12.5.tar.gz", hash = "sha256:1a4995114262bffbc2413b159f2a1a480c969de6e6eb13ee966d470af86af59c"},

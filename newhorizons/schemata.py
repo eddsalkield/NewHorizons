@@ -1,32 +1,38 @@
 from typing import List, Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, Extra
 
 # TODO: for ints, distinguish between 32 and 64 bit variants
 
+# Sub-models should have extra=Extra.forbid, since they are used for typechecking
+#   and subsequent reporting
+# Top-level models should have extra=Extra.ignore, to ensure that we strictly
+#   adhere to the API when returning
+
 ## Abstract classes
 # TODO: make abstract
-class AbstractThumbnail(BaseModel):
+
+# TODO: validator to log whenever non-square thumbnails are found
+class AbstractThumbnail(BaseModel, extra=Extra.forbid):
     url: str
     width: int
     height: int
 
-class VideoThumbnail(AbstractThumbnail):
+class VideoThumbnail(AbstractThumbnail, extra=Extra.forbid):
     quality: Optional[str]
 
-class AuthorThumbnail(AbstractThumbnail):
+class AuthorThumbnail(AbstractThumbnail, extra=Extra.forbid):
     pass
 
-class AuthorBanner(AbstractThumbnail):
+class AuthorBanner(AbstractThumbnail, extra=Extra.forbid):
     pass
 
 
-## /api/v1/videos:id
-class Caption(BaseModel):
+class Caption(BaseModel, extra=Extra.forbid):
     label: str
     languageCode: str
     url: str
 
-class AdaptiveFormat(BaseModel):
+class AdaptiveFormat(BaseModel, extra=Extra.forbid):
     index: Optional[str]
     bitrate: Optional[str]
     init: Optional[str]
@@ -41,7 +47,7 @@ class AdaptiveFormat(BaseModel):
     qualityLabel: Optional[str]
     resolution: Optional[str]
 
-class FormatStream(BaseModel):
+class FormatStream(BaseModel, extra=Extra.forbid):
     url: str
     itag: Optional[str]
     type: Optional[str]
@@ -54,10 +60,9 @@ class FormatStream(BaseModel):
 
 ### Response schemata
 
-class VideosResponse(BaseModel):
-
-
-    class RecommendedVideo(BaseModel):
+## /api/v1/videos:id
+class VideosResponse(BaseModel, extra=Extra.ignore):
+    class RecommendedVideo(BaseModel, extra=Extra.forbid):
         videoId: str
         title: str
         videoThumbnails: List[VideoThumbnail]
@@ -106,8 +111,7 @@ class VideosResponse(BaseModel):
     recommendedVideos: List[RecommendedVideo]
 
 
-#/api/v1/channels/:ucid
-class LatestVideo(BaseModel):
+class LatestVideo(BaseModel, extra=Extra.forbid):
     title: str
     videoId: str
     author: str
@@ -125,20 +129,21 @@ class LatestVideo(BaseModel):
     paid: Optional[bool]
     premium: Optional[bool]
 
-class RelatedChannel(BaseModel):
+class RelatedChannel(BaseModel, extra=Extra.forbid):
     author: str
     authorId: str
     authorUrl: str
     authorThumbnails: List[AuthorThumbnail]
 
-class ChannelsResponse(BaseModel):
+#/api/v1/channels/:ucid
+class ChannelsResponse(BaseModel, extra=Extra.ignore):
     author: str
     authorId: str
     authorUrl: str
     authorBanners: List[AuthorBanner]
     authorThumbnails: List[AuthorThumbnail]
 
-    subcount: Optional[int]
+    subCount: Optional[int]
     totalViews: Optional[int]
     joined: Optional[int]
 
@@ -149,5 +154,5 @@ class ChannelsResponse(BaseModel):
     descriptionHtml: Optional[str]
     allowedRegions: Optional[List[str]]
 
-    latestVideos: List[LatestVideo]
+    latestVideos: Optional[List[LatestVideo]]
     relatedChannels: Optional[List[RelatedChannel]]

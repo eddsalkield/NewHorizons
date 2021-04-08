@@ -1,1 +1,9 @@
 Black for code linting
+
+# If you patch calmjs for this, fix typo "Initialisere":
+# https://github.com/calmjs/calmjs.parse/blob/e5998ef618a2abdd79c0dec44a1dc58df7c2538f/src/calmjs/parse/parsers/es5.py#L424
+
+Log levels for when parsing starts to degrade
+
+Idea: central location for debug logs to pool to, allowing us to track
+    when YouTube data changes
